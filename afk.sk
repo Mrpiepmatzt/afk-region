@@ -1,0 +1,314 @@
+#[mrpiepmatzt afk region]
+
+on load:
+	delete {afkteleporting::*}
+	delete {inafkarea::*}
+	delete {pos::*}
+
+on tab complete of "/afk":
+	set tab completions for position 1 to "1"
+
+command /afk :
+	trigger:
+			if {afk} is not set:
+				send "&cAfk location is not set!"
+				stop
+			if {afkteleporting::%player's uuid%} is set:
+				stop
+			if {afkteleporting::%player's uuid%} is not set:
+				set {afkteleporting::%player's uuid%} to true
+				set {pos::%player's uuid%} to player's location
+				if {afkteleporting::%player's uuid%} is set:
+					send "<##A7A7A7>You will be teleported in <##37BFF8>5 <##A7A7A7>seconds"
+					send action bar "<##A7A7A7>You will be teleported in <##37BFF8>5 <##A7A7A7>seconds" to player
+					wait 1 second
+				if {afkteleporting::%player's uuid%} is set:
+					send "<##A7A7A7>You will be teleported in <##37BFF8>4 <##A7A7A7>seconds"
+					send action bar "<##A7A7A7>You will be teleported in <##37BFF8>4 <##A7A7A7>seconds" to player
+					wait 1 second
+				if {afkteleporting::%player's uuid%} is set:
+					send "<##A7A7A7>You will be teleported in <##37BFF8>3 <##A7A7A7>seconds"
+					send action bar "<##A7A7A7>You will be teleported in <##37BFF8>3 <##A7A7A7>seconds" to player
+					wait 1 second
+				if {afkteleporting::%player's uuid%} is set:
+					send "<##A7A7A7>You will be teleported in <##37BFF8>2 <##A7A7A7>seconds"
+					send action bar "<##A7A7A7>You will be teleported in <##37BFF8>2 <##A7A7A7>seconds" to player
+					wait 1 second
+				if {afkteleporting::%player's uuid%} is set:
+					send "<##A7A7A7>You will be teleported in <##37BFF8>1 <##A7A7A7>seconds"
+					send action bar "<##A7A7A7>You will be teleported in <##37BFF8>1 <##A7A7A7>seconds" to player
+					wait 1 second
+				if {afkteleporting::%player's uuid%} is set:
+					send action bar "<##A7A7A7>You teleported to the <##A303F9>ᴀꜰᴋ 1" to player
+					send "<##A7A7A7>You teleported to the <##A303F9>ᴀꜰᴋ 1"
+					delete {afkteleporting::%player's uuid%}
+					delete {pos::%player's uuid%}
+					teleport player to {afk}
+					play sound "entity.enderman.teleport" to player
+		else:
+			make console execute command "/dmenu open afk %player's name%"
+
+command /setafk:
+	permission: afk.setafk
+	permission message: &cYou don't have permission to execute this command!
+	trigger:
+		set {afk} to location of player
+		send "&aYou have successfully set the afk location at your location!"
+
+command /delafk:
+	permission: afk.delafk
+	permission message: &cYou don't have permission to execute this command!
+	trigger:
+		delete {afk}
+		send "&aYou have successfully unset the afk location!"
+
+on player move:
+	if {afkteleporting::%player's uuid%} is set:
+		if distance between {pos::%player's uuid%} and player's location is bigger than 0.5:
+			delete {afkteleporting::%player's uuid%}
+			delete {pos::%player's uuid%}
+			send "<##FB5454>Teleport cancelled because you moved."
+			send action bar "<##FB5454>Teleport cancelled because you moved." to player
+
+command /startafktimer [<offline player>]:
+	permission: afk.startafktimer
+	permission message: &cYou don't have permission to execute this command!
+	trigger:
+		if arg-1 is set:
+			if arg-1 is online:
+				set {inafkarea::%arg-1's uuid%} to true
+				if {inafkarea::%arg-1's uuid%} is set:
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney <##A8A8A8> in <##A303F9>59s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>58s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>57s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>56s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>55s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>54s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>53s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>52s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>51s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>50s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>49s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>48s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>47s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>46s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>45s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>44s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>43s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>42s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>41s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>40s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>39s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>38s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>37s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>36s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>35s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>34s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>33s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>32s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>31s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>30s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>29s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin  <##A303F9>28s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>27s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>26s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>25s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>24s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>23s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>22s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>21s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>20s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>19s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>18s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>17s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>16s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>15s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>14s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>13s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>12s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>11s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>10s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>9s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>8s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>7s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>6s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>5s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>4s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>3s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>2s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+					send action bar "<##A8A8A8>Next &amoney &fin <##A303F9>1s" to arg-1
+					wait 1 second
+				if {inafkarea::%arg-1's uuid%} is set:
+
+					if {shardbooster::%arg-1's uuid%} is not set:
+						send action bar "<##A303F9>+1k money" to arg-1
+						make console execute command "/eco give %arg-1's name% 1000 -s"
+					else:
+						if {shardbooster::%arg-1's uuid%} is "x2":
+							send action bar "<##A303F9>+2 Shard" to arg-1
+							make console execute command "/eco give %arg-1's name% 1000 -s"
+						else:
+							if {shardbooster::%arg-1's uuid%} is "x3":
+								send action bar "<##A303F9>+3 Shard" to arg-1
+								make console execute command "/eco give %arg-1's name% 1000 -s"
+							else:
+								if {shardbooster::%arg-1's uuid%} is "x4":
+									send action bar "<##A303F9>+4 Shard" to arg-1
+									make console execute command "/eco give %arg-1's name% 1000 -s"
+
+					delete {inafkarea::%arg-1's uuid%}
+					wait 1 second
+				if arg-1 is in the region "afk":
+					make console execute command "/startafktimer %arg-1's name%"
+
+on enter of region "afk":
+	if {inafkarea::%player's uuid%} is not set:
+		make console execute command "/startafktimer %player's name%"
+		wait 1 second
+		send title "<##A303F9>ᴀꜰᴋ" with subtitle "&fEarn 1k money per minute" to player
+
+on leave of region "afk":
+	if {inafkarea::%player's uuid%} is set:
+		delete {inafkarea::%player's uuid%}
+
+on join:
+	if {inafkarea::%player's uuid%} is set:
+		delete {inafkarea::%player's uuid%}
+	if {pos::%player's uuid%} is set:
+		delete {pos::%player's uuid%}
+	if {afkteleporting::%player's uuid%} is set:
+		delete {afkteleporting::%player's uuid%}
+	if {inafkarea::%player's uuid%} is set:
+		delete {inafkarea::%player's uuid%}
+	wait 1 tick
+	if player's world is "afk":
+		if {inafkarea::%player's uuid%} is not set:
+			make console execute command "/startafktimer %player's name%"
+			wait 1 second
+			send title "<##A303F9>ᴀꜰᴋ" with subtitle "&fEarn one k money per minute" to player
+
+on quit:
+	if {pos::%player's uuid%} is set:
+		delete {pos::%player's uuid%}
+	if {afkteleporting::%player's uuid%} is set:
+		delete {afkteleporting::%player's uuid%}
+	if {inafkarea::%player's uuid%} is set:
+		delete {inafkarea::%player's uuid%}
